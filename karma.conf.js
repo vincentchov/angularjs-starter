@@ -27,13 +27,14 @@ module.exports = function(config) {
         preprocessors: { "spec.bundle.js": ["webpack", "sourcemap"] },
 
         webpack: {
+            mode: "development",
             devtool: "inline-source-map",
             module: {
-                loaders: [
-                    { test: /\.js/, exclude: [/app\/lib/, /node_modules/], loader: "babel" },
-                    { test: /\.html/, loader: "raw" },
-                    { test: /\.scss$/, loader: "style!css!sass" },
-                    { test: /\.css$/, loader: "style!css" }
+                rules: [
+                    { test: /\.js/, exclude: [/app\/lib/, /node_modules/], use: ["babel-loader"] },
+                    { test: /\.html/, use: ["raw-loader"] },
+                    { test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"] },
+                    { test: /\.css$/, use: ["style-loader", "css-loader"] }
                 ]
             }
         },
