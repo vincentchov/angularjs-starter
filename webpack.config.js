@@ -6,28 +6,38 @@ module.exports = {
     devtool: "source-map",
     entry: {},
     module: {
-        loaders: [
-            { test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: "ng-annotate!babel" },
-            { test: /\.html$/, loader: "raw" },
-            { test: /\.scss$/, loader: "style!css?sourceMap!sass?sourceMap" },
-            { test: /\.css$/, loader: "style!css" },
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: [/app\/lib/, /node_modules/],
+                use: ["babel-loader"]
+            },
+            { test: /\.html$/, use: [{ loader: "raw-loader" }] },
+            {
+                test: /\.scss$/,
+                use: ["style-loader", "css-loader", "sass-loader"]
+            },
+            { test: /\.css$/, use: ["style-loader", "css-loader"] },
             {
                 test: /\.woff/,
-                loader: `${require.resolve(
-                    "url-loader"
-                )}?prefix=font/&limit=10000&mimetype=application/font-woff&name=assets/[hash].[ext]`
+                use: [
+                    {
+                        loader: "url-loader",
+                        options: {
+                            name:
+                                "?prefix=font/&limit=10000&mimetype=application/font-woff&name=assets/[hash].[ext]"
+                        }
+                    }
+                ]
             },
             {
-                test: /\.ttf/,
-                loader: `${require.resolve("file-loader")}?prefix=font/&name=assets/[hash].[ext]`
-            },
-            {
-                test: /\.eot/,
-                loader: `${require.resolve("file-loader")}?prefix=font/&name=assets/[hash].[ext]`
-            },
-            {
-                test: /\.svg/,
-                loader: `${require.resolve("file-loader")}?prefix=font/&name=assets/[hash].[ext]`
+                test: [/\.ttf/, /\.eot/, /\.svg/],
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: { name: "?prefix=font/&name=assets/[hash].[ext]" }
+                    }
+                ]
             }
         ]
     },
@@ -43,7 +53,7 @@ module.exports = {
 
         // Automatically move all modules defined outside of application directory to vendor bundle.
         // If you are using more complicated project structure, consider to specify common chunks manually.
-        new webpack.optimize.CommonsChunkPlugin({
+        new webpack.optimize.SplitChunksPlugin({
             name: "vendor",
             minChunks: function(module, count) {
                 return (
