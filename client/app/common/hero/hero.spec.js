@@ -1,49 +1,51 @@
-import HeroModule from './hero'
-import HeroController from './hero.controller';
-import HeroComponent from './hero.component';
-import HeroTemplate from './hero.html';
+import HeroModule from "./hero";
+import HeroController from "./hero.controller";
+import HeroComponent from "./hero.component";
+import HeroTemplate from "./hero.html";
 
-describe('Hero', () => {
-  let $rootScope, makeController;
+describe("Hero", () => {
+    let $rootScope;
+    let makeController;
 
-  beforeEach(window.module(HeroModule));
-  beforeEach(inject((_$rootScope_) => {
-    $rootScope = _$rootScope_;
-    makeController = () => {
-      return new HeroController();
-    };
-  }));
+    beforeEach(window.module(HeroModule));
+    beforeEach(inject(_$rootScope_ => {
+        $rootScope = _$rootScope_;
+        makeController = () => {
+            return new HeroController();
+        };
+    }));
 
-  describe('Module', () => {
-    // top-level specs: i.e., routes, injection, naming
-  });
-
-  describe('Controller', () => {
-    // controller specs
-    it('has a name property [REMOVE]', () => { // erase if removing this.name from the controller
-      let controller = makeController();
-      expect(controller).to.have.property('name');
+    describe("Module", () => {
+        // top-level specs: i.e., routes, injection, naming
     });
-  });
 
-  describe('Template', () => {
-    // template specs
-    // tip: use regex to ensure correct bindings are used e.g., {{  }}
-    it('has name in template [REMOVE]', () => {
-      expect(HeroTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+    describe("Controller", () => {
+        // controller specs
+        it("has a name property [REMOVE]", () => {
+            // erase if removing this.name from the controller
+            const controller = makeController();
+            expect(controller).to.have.property("name");
+        });
     });
-  });
 
-  describe('Component', () => {
-      // component/directive specs
-      let component = HeroComponent;
+    describe("Template", () => {
+        // template specs
+        // tip: use regex to ensure correct bindings are used e.g., {{  }}
+        it("has name in template [REMOVE]", () => {
+            expect(HeroTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+        });
+    });
 
-      it('includes the intended template',() => {
-        expect(component.template).to.equal(HeroTemplate);
-      });
+    describe("Component", () => {
+        // component/directive specs
+        const component = HeroComponent;
 
-      it('invokes the right controller', () => {
-        expect(component.controller).to.equal(HeroController);
-      });
-  });
+        it("includes the intended template", () => {
+            expect(component.template).to.equal(HeroTemplate);
+        });
+
+        it("invokes the right controller", () => {
+            expect(component.controller).to.equal(HeroController);
+        });
+    });
 });
