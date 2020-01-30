@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const config = require("./webpack.config");
 
+config.mode = "production";
 config.output = {
     filename: "[name].bundle.js",
     publicPath: "",
