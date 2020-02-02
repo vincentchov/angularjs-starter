@@ -1,3 +1,5 @@
+const webpackConfig = require("./webpack.dev.config");
+
 module.exports = function(config) {
     config.set({
         // base path used to resolve all patterns
@@ -27,16 +29,9 @@ module.exports = function(config) {
         preprocessors: { "spec.bundle.js": ["webpack", "sourcemap"] },
 
         webpack: {
-            mode: "development",
-            devtool: "inline-source-map",
-            module: {
-                rules: [
-                    { test: /\.js/, exclude: [/app\/lib/, /node_modules/], use: ["babel-loader"] },
-                    { test: /\.html/, use: ["raw-loader"] },
-                    { test: /\.scss$/, use: ["style-loader", "css-loader", "sass-loader"] },
-                    { test: /\.css$/, use: ["style-loader", "css-loader"] }
-                ]
-            }
+            module: webpackConfig.module,
+            mode: webpackConfig.mode,
+            devtool: webpackConfig.devtool
         },
 
         webpackServer: {
