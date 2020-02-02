@@ -12,7 +12,7 @@ module.exports = {
                 exclude: [/app\/lib/, /node_modules/],
                 use: ["babel-loader"]
             },
-            { test: /\.html$/, use: [{ loader: "raw-loader" }] },
+            { test: /\.html$/, use: [{ loader: "html-loader" }] },
             {
                 test: /\.scss$/,
                 use: ["style-loader", "css-loader", "sass-loader"]
