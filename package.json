@@ -75,7 +75,7 @@
     "yargs": "^3.9.0"
   },
   "scripts": {
-    "test": "karma start"
+    "test": "jest"
   },
   "keywords": [
     "webpack",
