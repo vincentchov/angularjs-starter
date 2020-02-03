@@ -10,7 +10,11 @@ module.exports = function(config) {
         frameworks: ["mocha", "chai"],
 
         // list of files/patterns to load in the browser
-        files: [{ pattern: "spec.bundle.js", watched: false }],
+        files: [
+            "node_modules/angular/angular.js",
+            "node_modules/angular-mocks/angular-mocks.js",
+            { pattern: "client/**/*.spec.js", watched: false }
+        ],
 
         // files to exclude
         exclude: [],
@@ -26,7 +30,7 @@ module.exports = function(config) {
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: { "spec.bundle.js": ["webpack", "sourcemap"] },
+        preprocessors: { "client/**/*.spec.js": ["webpack", "sourcemap"] },
 
         webpack: {
             module: webpackConfig.module,
