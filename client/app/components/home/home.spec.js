@@ -19,10 +19,10 @@ describe("Home", () => {
 
     describe("Module", () => {
         // top-level specs: i.e., routes, injection, naming
-        it("default component should be home", () => {
+        test("default component should be home", () => {
             $location.url("/");
             $rootScope.$digest();
-            expect($state.current.component).to.eq("home");
+            expect($state.current.component).toBe("home");
         });
     });
 
@@ -35,9 +35,9 @@ describe("Home", () => {
             });
         });
 
-        it("has a name property", () => {
+        test("has a name property", () => {
             // erase if removing this.name from the controller
-            expect(controller).to.have.property("name");
+            expect(controller).toHaveProperty("name");
         });
     });
 
@@ -52,8 +52,8 @@ describe("Home", () => {
             scope.$apply();
         });
 
-        it("has name in template", () => {
-            expect(template.find("h1").html()).to.eq("Found in home.html");
+        test("has name in template", () => {
+            expect(template.find("h1").html()).toBe("Found in home.html");
         });
     });
 });

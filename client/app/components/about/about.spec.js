@@ -19,10 +19,10 @@ describe("About", () => {
 
     describe("Module", () => {
         // top-level specs: i.e., routes, injection, naming
-        it("About component should be visible when navigates to /about", () => {
+        test("About component should be visible when navigates to /about", () => {
             $location.url("/about");
             $rootScope.$digest();
-            expect($state.current.component).to.eq("about");
+            expect($state.current.component).toBe("about");
         });
     });
 
@@ -35,9 +35,9 @@ describe("About", () => {
             });
         });
 
-        it("has a name property", () => {
+        test("has a name property", () => {
             // erase if removing this.name from the controller
-            expect(controller).to.have.property("name");
+            expect(controller).toHaveProperty("name");
         });
     });
 
@@ -52,8 +52,8 @@ describe("About", () => {
             scope.$apply();
         });
 
-        it("has name in template", () => {
-            expect(template.find("h1").html()).to.eq("about");
+        test("has name in template", () => {
+            expect(template.find("h1").html()).toBe("about");
         });
     });
 });
